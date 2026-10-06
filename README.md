@@ -1,36 +1,27 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+## Configuração
 
-## Getting Started
+Antes de executar o projeto, é necessário configurar a variável de ambiente responsável pelo número de WhatsApp utilizado para receber os agendamentos.
 
-First, run the development server:
+1. Crie um arquivo `.env.local` na raiz do projeto.
+2. Adicione a variável:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+```env
+NEXT_PUBLIC_WHATSAPP_NUMBER=SEU_NUMERO_AQUI
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+3. Substitua `SEU_NUMERO_AQUI` pelo número de WhatsApp que deverá receber as mensagens.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+> Utilize o número no formato internacional, apenas com números, sem espaços, `+`, parênteses ou hífens.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Exemplo:
 
-## Learn More
+```env
+NEXT_PUBLIC_WHATSAPP_NUMBER=5511999999999
+```
 
-To learn more about Next.js, take a look at the following resources:
+Depois disso, execute o projeto normalmente:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+npm install
+npm run dev
+```
