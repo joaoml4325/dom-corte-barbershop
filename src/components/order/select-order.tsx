@@ -50,7 +50,7 @@ const customStyles = {
 
     singleValue: (base: any) => ({
         ...base,
-        color: '#fff',
+        color: '#fff'
     }),
 
     placeholder: (base: any) => ({
@@ -69,8 +69,8 @@ export const SelectOrder = ({
     const selectedOption = options.find(option => option.value === value) ?? null;
     
     return (
-        <div className="mx-auto">
-            <h1 className="text-3xl font-bold text-white mb-4">{title}</h1>
+        <div>
+            <h1 className="text-2xl md:text-3xl font-bold text-white mb-4">{title}</h1>
             <Select
                 instanceId={title}
                 options={options}
@@ -79,7 +79,7 @@ export const SelectOrder = ({
                 placeholder={placeholder}
                 isSearchable={false}
                 styles={customStyles}
-                className="w-150"
+                className="w-full md:w-150"
             />
         </div>
     );

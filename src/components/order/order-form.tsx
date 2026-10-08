@@ -32,7 +32,7 @@ export const OrderForm = ({ isOpen, setIsOpen, hasOpened }: Props) => {
             barber: ''
         }
     });
-    
+
     const onSubmit = (data: OrderFormData) => {
         const message = generateMessage(data.service, data.barber);
 
@@ -43,13 +43,12 @@ export const OrderForm = ({ isOpen, setIsOpen, hasOpened }: Props) => {
 
     return (
         <div
-            className={`w-full h-screen fixed top-0 left-0 backdrop-blur-sm flex justify-center items-center
-                ${
-                    !hasOpened
-                        ? 'opacity-0 pointer-events-none'
-                        : isOpen
-                            ? 'animate-orderOpen'
-                            : 'animate-orderClose pointer-events-none'
+            className={`w-full h-screen p-4 md:p-0 fixed top-0 left-0 backdrop-blur-sm flex justify-center items-center
+                ${!hasOpened
+                    ? 'opacity-0 pointer-events-none'
+                    : isOpen
+                        ? 'animate-orderOpen'
+                        : 'animate-orderClose pointer-events-none'
                 }
             `}
         >
@@ -64,56 +63,52 @@ export const OrderForm = ({ isOpen, setIsOpen, hasOpened }: Props) => {
                         />
                     </div>
                 </div>
-                <div className=" flex flex-col justify-between items-center gap-10">
-                    <h1 className="text-7xl font-title text-(--yellow)">Agendar</h1>
+                <div className="flex flex-col justify-between items-center gap-10">
+                    <h1 className="text-6xl md:text-7xl font-title text-(--yellow)">Agendar</h1>
 
                     <form
                         onSubmit={handleSubmit(onSubmit)}
-                        className="flex flex-col items-center gap-10"
+                        className="w-full flex flex-col md:items-center gap-10 p-6 md:p-0"
                     >
-                        <div>
-                            <Controller
-                                name="service"
-                                control={control}
-                                render={({ field }) => (
-                                    <SelectOrder
-                                        options={Cuts.map(item => ({
-                                            value: item.value,
-                                            label: item.name
-                                        }))}
-                                        placeholder="Escolha seu serviço"
-                                        title="Serviço"
-                                        value={field.value}
-                                        onChange={field.onChange}
-                                    />
-                                )}
-                            />
-                            {errors.service && (
-                                <p className="animate-warning w-fit bg-red-900 text-red-300 border border-red-500 text-sm rounded-md py-1 px-2 mt-2">{errors.service.message}</p>
+                        <Controller
+                            name="service"
+                            control={control}
+                            render={({ field }) => (
+                                <SelectOrder
+                                    options={Cuts.map(item => ({
+                                        value: item.value,
+                                        label: item.name
+                                    }))}
+                                    placeholder="Escolha seu serviço"
+                                    title="Serviço"
+                                    value={field.value}
+                                    onChange={field.onChange}
+                                />
                             )}
-                        </div>
+                        />
+                        {errors.service && (
+                            <p className="animate-warning w-fit bg-red-900 text-red-300 border border-red-500 text-sm rounded-md py-1 px-2 mt-2">{errors.service.message}</p>
+                        )}
 
-                        <div>
-                            <Controller
-                                name="barber"
-                                control={control}
-                                render={({ field }) => (
-                                    <SelectOrder
-                                        options={TeamMembers.map(item => ({
-                                            value: item.value,
-                                            label: item.name
-                                        }))}
-                                        placeholder="Escolha o profissional"
-                                        title="Barbeiro"
-                                        value={field.value}
-                                        onChange={field.onChange}
-                                    />
-                                )}
-                            />
-                            {errors.barber && (
-                                <p className="animate-warning w-fit bg-red-900 text-red-300 border border-red-500 text-sm rounded-md py-1 px-2 mt-2">{errors.barber.message}</p>
+                        <Controller
+                            name="barber"
+                            control={control}
+                            render={({ field }) => (
+                                <SelectOrder
+                                    options={TeamMembers.map(item => ({
+                                        value: item.value,
+                                        label: item.name
+                                    }))}
+                                    placeholder="Escolha o profissional"
+                                    title="Barbeiro"
+                                    value={field.value}
+                                    onChange={field.onChange}
+                                />
                             )}
-                        </div>
+                        />
+                        {errors.barber && (
+                            <p className="animate-warning w-fit bg-red-900 text-red-300 border border-red-500 text-sm rounded-md py-1 px-2 mt-2">{errors.barber.message}</p>
+                        )}
 
                         <button
                             type="submit"

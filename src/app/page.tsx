@@ -39,7 +39,7 @@ const Page = () => {
   return (
     <div className="w-full">
       <div
-        className="w-full h-screen"
+        className="w-full"
         style={{
           backgroundImage: ('url(/images/background-barber.jpg)'),
           backgroundRepeat: 'no-repeat',
