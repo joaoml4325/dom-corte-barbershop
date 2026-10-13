@@ -12,7 +12,7 @@ export const Call = ({ onOrderClick }: Props) => {
             <Container>
                 <div className="text-center">
                     <p className="uppercase text-xs text-(--yellow-light)">Pronto para uma transformação?</p>
-                    <h2 className="font-title text-4xl md:text-7xl font-bold text-(--title-color) my-4">Agende seu horário agora</h2>
+                    <h2 className="font-title text-4xl md:text-5xl lg:text-7xl font-bold text-(--title-color) my-4">Agende seu horário agora</h2>
                     <p className="text-(--light-gray) text-xs md:text-[16px]">Escolha o profissinal, o serviço e o horário ideal. Resposta rápida, atendimento VIP.</p>
 
                     <div className="w-30/100 h-px bg-(--yellow-light) my-12 mx-auto" />

@@ -5,7 +5,7 @@ export const Location = () => {
     return (
         <div className="bg-(--blue) py-10">
             <Container>
-                <h2 className="font-title text-5xl md:text-7xl font-bold text-(--title-color) mb-4">Onde nos encontrar?</h2>
+                <h2 className="font-title text-4xl md:text-5xl lg:text-7xl font-bold text-(--title-color) mb-4">Onde nos encontrar?</h2>
                 <p className="text-[#bbb] mb-20 text-sm md:text-[16px]">Um espaço planejado para o seu conforto, localizado no ponto mais conveniente da região.</p>
                 <div className="flex gap-10">
                     <div className="flex w-full max-h-full flex-col-reverse md:flex-row-reverse justify-between mx-auto gap-10">

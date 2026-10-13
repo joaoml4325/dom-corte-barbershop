@@ -43,7 +43,7 @@ export const OrderForm = ({ isOpen, setIsOpen, hasOpened }: Props) => {
 
     return (
         <div
-            className={`w-full h-screen p-4 md:p-0 fixed top-0 left-0 backdrop-blur-sm flex justify-center items-center
+            className={`w-full h-screen p-4 fixed top-0 left-0 backdrop-blur-sm flex justify-center items-center
                 ${!hasOpened
                     ? 'opacity-0 pointer-events-none'
                     : isOpen

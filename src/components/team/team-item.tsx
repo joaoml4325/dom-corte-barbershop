@@ -10,16 +10,16 @@ export const TeamItem = ({ member }: Props) => {
     return (
         <div
             key={member.id}
-            className="w-70 border border-[#222] hover:border-(--gold) transition-colors duration-300 shadow-md shadow-black/30 group relative"
+            className="w-70 h-full max-h-max border border-[#222] hover:border-(--gold) transition-colors duration-300 shadow-md shadow-black/30 group relative"
         >
-            <div className="w-full h-100 overflow-hidden">
+            <div className="h-100 bg-red-500 overflow-hidden">
                 <img
                     src={member.img}
                     alt={member.name}
-                    className="w-max h-max transition-transform duration-300 group-hover:scale-110"
+                    className="w-full h-full transition-transform duration-300 group-hover:scale-110"
                 />
             </div>
-            <div className="py-6 px-6 flex flex-col">
+            <div className="h-36 py-6 px-6 flex flex-col">
                 <p className="text-(--yellow-bold) font-title text-4xl mb-4">{member.name}</p>
                 <p className="text-(--light-gray) text-sm">{member.specialty}</p>
             </div>

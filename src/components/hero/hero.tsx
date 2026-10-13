@@ -13,9 +13,9 @@ export const Hero = ({ onOrderClick }: Props) => {
             <Container>
                 <div className="flex flex-col md:flex-row justify-between">
                     <div className="flex flex-col justify-center items-center md:items-start">
-                        <h1 className="font-title text-5xl md:text-8xl font-bold text-center md:text-left mb-3 md:mb-6">Seu <span className="text-(--yellow-light)">estilo</span> <br /> começa aqui</h1>
+                        <h1 className="font-title text-5xl md:text-7xl lg:text-8xl font-bold text-center md:text-left mb-3 md:mb-6">Seu <span className="text-(--yellow-light)">estilo</span> <br /> começa aqui</h1>
 
-                        <p className="text-[#bbb] text-xs md:text-lg text-center md:text-left w-40 md:w-auto">O estilo que você merece, a atitude que você carrega. <br /><span className="hidden md:block">Venha viver essa experiência e agende seu horário!</span></p>
+                        <p className="text-[#bbb] text-xs md:text-sm lg:text-lg text-center md:text-left w-40 md:w-auto">O estilo que você merece, a atitude que você carrega. <br /><span className="hidden md:block">Venha viver essa experiência e agende seu horário!</span></p>
 
                         <img src="/images/barber-shop.jpg" className="block md:hidden w-50 h-70 my-10 rounded-sm shadow-black/30 shadow-lg" />
 
@@ -32,7 +32,7 @@ export const Hero = ({ onOrderClick }: Props) => {
                             />
                         </div>
                     </div>
-                    <img src="/images/barber-shop.jpg" className="hidden md:block h-140 rounded-sm shadow-black/30 shadow-lg" />
+                    <img src="/images/barber-shop.jpg" className="hidden md:block h-100 lg:h-140 rounded-sm shadow-black/30 shadow-lg" />
                 </div>
             </Container>
         </section>

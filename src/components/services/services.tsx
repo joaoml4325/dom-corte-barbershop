@@ -9,20 +9,41 @@ import { Container } from "../container";
 export const Services = () => {
     const [slide, setSlide] = useState(0);
     const [isMobile, setIsMobile] = useState(false);
+    const [isTablet, setIsTablet] = useState(false);
 
     const sliderRef = useRef<HTMLDivElement>(null);
     const itemRef = useRef<HTMLDivElement>(null);
 
+    const gap = isMobile ? 16 : isTablet ? 32 : 40;
+
     useEffect(() => {
+        let timeout: ReturnType<typeof setTimeout>;
+
         const checkScreen = () => {
-            setIsMobile(window.innerWidth < 768);
-        }
+            const width = window.innerWidth;
+            
+            setIsMobile(width < 768);
+            setIsTablet(width >= 768 && window.innerWidth < 1024)
+
+            clearTimeout(timeout);
+
+            timeout = setTimeout(() => {
+                // Volta para o primeiro serviço
+                setSlide(0);
+
+                // Remove o deslocamento anterior
+                if (sliderRef.current) {
+                    sliderRef.current.style.transform = "translateX(0px)";
+                }
+            }, 150);
+        };
 
         checkScreen();
 
         window.addEventListener('resize', checkScreen);
 
         return () => {
+            clearTimeout(timeout);
             window.removeEventListener('resize', checkScreen);
         }
     }, []);
@@ -31,7 +52,6 @@ export const Services = () => {
         if (!sliderRef.current || !itemRef.current) return;
 
         const itemWidth = itemRef.current.offsetWidth;
-        const gap = isMobile ? 16 : 40;
 
         sliderRef.current.style.transform =
             `translateX(-${(itemWidth + gap) * newSlide}px)`;
@@ -43,6 +63,7 @@ export const Services = () => {
         const amount = isMobile ? 1 : 2;
         const maxSlide = isMobile
             ? Cuts.length - 1
+            : isTablet ? Cuts.length - 2
             : Cuts.length - 3;
 
         const nextSlide = Math.min(slide + amount, maxSlide);
@@ -62,12 +83,15 @@ export const Services = () => {
         <section id="services" className="bg-(--gray) py-10">
             <Container>
                 <div className="w-full h-full overflow-hidden">
-                    <h2 className="font-title text-4xl md:text-7xl font-bold text-(--title-color)">Serviços</h2>
+                    <h2 className="font-title text-4xl md:text-5xl lg:text-7xl font-bold text-(--title-color)">Serviços</h2>
                     <p className="text-(--light-gray) mt-2 mb-7 md:mb-16 text-xs md:text-sm max-w-lg">Na <span className="text-(--yellow-light) font-bold">Dom Corte</span>, o cuidado com o seu visual é levado a sério. <span className="hidden md:inline">Combinamos a tradição da barbearia clássica com as melhores técnicas modernas para entregar cortes precisos, barbas alinhadas e um atendimento de excelência.</span></p>
-                    <div className="w-full md:w-250 overflow-hidden mx-auto">
+                    <div className="w-full md:w-158 lg:w-245 overflow-hidden mx-auto">
                         <div
                             ref={sliderRef}
-                            className="flex gap-4 md:gap-10 transition-transform duration-500 "
+                            style={{
+                                gap: `${gap}px`
+                            }}
+                            className="flex transition-transform duration-500"
                         >
                             {Cuts.map((cut, index) => (
                                 <div
@@ -91,7 +115,7 @@ export const Services = () => {
                         <button
                             onClick={goNext}
                             disabled={
-                                slide >= Cuts.length - (isMobile ? 1 : 3)
+                                slide >= Cuts.length - (isMobile ? 1 : isTablet ? 2 : 3)
                             }
                             className="bg-black/70 rounded-full p-1 cursor-pointer hover:text-(--yellow-light) disabled:hover:text-white disabled:opacity-30"
                         >

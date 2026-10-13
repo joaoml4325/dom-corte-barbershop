@@ -7,9 +7,9 @@ import Link from "next/link";
 
 export const Footer = () => {
     return (
-        <footer className="">
+        <footer>
             <Container>
-                <div className="h-full md:h-50 flex items-center justify-between flex-col md:flex-row">
+                <div className="h-full md:h-50 flex items-center justify-between flex-col md:flex-row px-0 md:px-6 lg:px-10">
                     <div className="h-full flex flex-col justify-between py-10">
                         <Logo />
                         <p className="hidden md:block text-(--light-gray) text-sm font-light">©2026 Todos direitos reservados</p>

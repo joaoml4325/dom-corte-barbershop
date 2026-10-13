@@ -9,9 +9,10 @@ export const Reviews = () => {
 
     const [isTransitioning, setIsTransitioning] = useState(false);
     const [isMobile, setIsMobile] = useState(false);
+    const [isTablet, setIsTablet] = useState(false);
 
-    const visibleItems = isMobile ? 1 : 3;
-    const gap = isMobile ? 12 : 32;
+    const visibleItems = isMobile ? 1 : isTablet ? 2 : 3;
+    const gap = isMobile ? 12 : isTablet ? 24 : 32;
 
     const [slide, setSlide] = useState(visibleItems);
 
@@ -26,28 +27,64 @@ export const Reviews = () => {
     const [itemWidth, setItemWidth] = useState(0);
 
     useEffect(() => {
-        const handleResize = () => {
-            setIsMobile(window.innerWidth < 768);
+        let timeout: ReturnType<typeof setTimeout>;
 
-            if (itemRef.current) {
-                setItemWidth(itemRef.current.offsetWidth);
-            }
-        }
+        const handleResize = () => {
+            const width = window.innerWidth;
+
+            setIsMobile(width < 768);
+            setIsTablet(width >= 768 && width < 1024);
+
+            clearTimeout(timeout);
+
+            timeout = setTimeout(() => {
+                const mobile = width < 768;
+                const tablet = width >= 768 && width < 1020;
+                const items = mobile ? 1 : tablet ? 2 : 3;
+
+                // Desativa a animação durante o reinício
+                setIsTransitioning(false);
+
+                // Volta à primeira avaliação original
+                setSlide(items);
+
+                // Mede novamente a largura depois do redimensionamento
+                if (itemRef.current) {
+                    setItemWidth(itemRef.current.offsetWidth);
+                }
+
+                // Reativa a animação depois de atualizar a posição
+                requestAnimationFrame(() => {
+                    requestAnimationFrame(() => {
+                        setIsTransitioning(true);
+                    });
+                });
+            }, 150);
+        };
 
         handleResize();
 
         window.addEventListener('resize', handleResize);
 
-        return () => window.removeEventListener('resize', handleResize);
+        return () => {
+            clearTimeout(timeout);
+            window.removeEventListener('resize', handleResize)
+        };
     }, []);
+
+    useEffect(() => {
+        if (!itemRef.current) return;
+
+        setItemWidth(itemRef.current.offsetWidth);
+    }, [isMobile, isTablet]);
 
     useEffect(() => {
         const interval = setInterval(() => {
             setSlide(prev => prev + 1);
-        }, isMobile ? 4000 : 2500);
+        }, isMobile ? 4000 : isTablet ? 3500 : 2500);
 
         return () => clearInterval(interval);
-    }, [isMobile]);
+    }, [isMobile, isTablet]);
 
     useEffect(() => {
         if (slide !== ReviewsApi.length + visibleItems) return;
@@ -66,14 +103,14 @@ export const Reviews = () => {
         return () => clearTimeout(timeout);
     }, [slide]);
 
-    useEffect(() => {
-        setIsTransitioning(false);
-        setSlide(visibleItems);
+    // useEffect(() => {
+    //     setIsTransitioning(false);
+    //     setSlide(visibleItems);
 
-        requestAnimationFrame(() => {
-            setIsTransitioning(true);
-        });
-    }, [visibleItems]);
+    //     requestAnimationFrame(() => {
+    //         setIsTransitioning(true);
+    //     });
+    // }, [visibleItems]);
 
     return (
         <div
@@ -85,9 +122,9 @@ export const Reviews = () => {
         >
             <div className="size-full bg-black/70 py-8 md:py-18 flex items-center">
                 <Container>
-                    <h2 className="font-title text-4xl md:text-7xl font-bold text-(--title-color)">Avaliações</h2>
+                    <h2 className="font-title text-4xl md:text-5xl lg:text-7xl font-bold text-(--title-color)">Avaliações</h2>
                     <p className="text-(--light-gray) mt-2 mb-16 text-sm md:text-[16px]">A palavra de quem confia no nosso trabalho todos os dias.</p>
-                    <div className="w-full md:w-241 overflow-hidden mx-auto">
+                    <div className="w-full md:w-156  lg:w-241 overflow-hidden mx-auto">
                         <div
                             className='flex'
                             style={{
